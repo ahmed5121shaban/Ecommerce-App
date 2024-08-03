@@ -10,6 +10,8 @@ import { SingleProductComponent } from '../single-product/single-product.compone
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { FooterComponent } from '../footer/footer.component';
 import { ProductsComponent } from '../products/products.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TextLittlePipe } from '../Pipes/textLittle.pipe';
 
 @NgModule({
   declarations: [
@@ -19,12 +21,14 @@ import { ProductsComponent } from '../products/products.component';
     ProductsComponent,
     SingleProductComponent,
     NavBarComponent,
-    FooterComponent
+    FooterComponent,
+    TextLittlePipe
    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
