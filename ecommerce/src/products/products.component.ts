@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, OutputEmitterRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Iproduct } from '../Interfaces/Iproduct';
 import { ProductService } from '../Services/product.service';
 
@@ -9,11 +9,18 @@ import { ProductService } from '../Services/product.service';
 })
 export class ProductsComponent implements OnInit {
   products!:Iproduct[]
-  constructor(private service:ProductService) {
+  categoryList!:any[]
+  constructor(private service:ProductService) {}
+
+
+  ngOnInit() {
     this.service.getAllProduct().subscribe({
       next:(item:any)=>{
         this.products = item
       }
+    })
+    this.service.getAllCategory().subscribe((items:any)=>{
+      this.categoryList = items
     })
   }
 
@@ -21,7 +28,9 @@ export class ProductsComponent implements OnInit {
     this.service.addToCart(item)
   }
 
-  ngOnInit() {
+  getCategoryList(item:string){
+    this.service.getProductByCategory(item).subscribe((pro:any)=>this.products = pro)
   }
+
 
 }

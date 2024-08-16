@@ -1,36 +1,43 @@
-import { NgModule } from '@angular/core';
+
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { CartComponent } from '../cart/cart.component';
-import { FilterProductsComponent } from '../filter-products/filter-products.component';
 import { SingleProductComponent } from '../single-product/single-product.component';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { FooterComponent } from '../footer/footer.component';
 import { ProductsComponent } from '../products/products.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { TextLittlePipe } from '../Pipes/textLittle.pipe';
+import { TitleLitlePipe } from '../Pipes/titleLitle.pipe';
+import { spinnerInterceptor } from '../Interceptors/spinner.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     CartComponent,
-    FilterProductsComponent,
     ProductsComponent,
     SingleProductComponent,
     NavBarComponent,
     FooterComponent,
-    TextLittlePipe
+    TextLittlePipe,
+    TitleLitlePipe
    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    HttpClientModule
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
+
   ],
-  providers: [],
+  providers: [provideHttpClient(withInterceptors([spinnerInterceptor]))],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

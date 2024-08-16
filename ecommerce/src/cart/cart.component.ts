@@ -13,7 +13,10 @@ export class CartComponent implements OnInit {
     this.cart = this.service.cart
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
+  deleteCartItem(item:Iproduct){
+    let index = this.cart.indexOf(item)
+    this.cart.splice(index,1)
+  }
 }
